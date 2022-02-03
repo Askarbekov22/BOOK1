@@ -1,0 +1,41 @@
+{% extends 'product/main.html' %}
+
+
+{% block title %}Продукты{% endblock %}
+{% block title2 %}Продукты{% endblock %}
+
+
+{% block content %}
+<style>
+    .cards{
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+    .card{
+        margin-bottom: 20px;
+        width: 45%;
+        background-color: brown;
+    }
+</style>
+<div class="cards">
+{% for i in object_list %}
+    <div class="card mb-3">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="{{ i.image.url }}" class="img-fluid rounded-start" alt="...">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{ i.name }}</h5>
+          <p class="card-text">{{ i.description }}</p>
+          {% for el in i.tag.all %}
+          <p class="card-text"><small class="text-muted">{{ el.name }}</small></p>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

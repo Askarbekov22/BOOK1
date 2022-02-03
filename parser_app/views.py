@@ -1,8 +1,7 @@
-
 from django.http import HttpResponse
 from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse
-from django.views.generic import ListView, FormView, DetailView
+from django.views.generic import ListView, FormView, DetailView, DeleteView
 from . import parser, models, forms
 
 
@@ -33,3 +32,12 @@ class FilmDetailView(DetailView):
     def get_object(self, *kwargs):
         id = self.kwargs.get('id')
         return get_object_or_404(models.Film, id=id)
+
+
+class FilmDeleteView(DeleteView):
+    template_name = 'confirm_delete_book.html'
+    success_url = '/parser/list/films/'
+
+    def get_object(self, **kwargs):
+        films_id = self.kwargs.get("id")
+        return get_object_or_404(models.Film, id=films_id)

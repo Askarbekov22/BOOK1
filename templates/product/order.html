@@ -1,0 +1,14 @@
+{% extends 'product/main.html' %}
+
+
+{% block title %}Order{% endblock %}
+{% block title2 %}Order{% endblock %}
+
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" text="create">
+    </form>
+{% endblock %}
